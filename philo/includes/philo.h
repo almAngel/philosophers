@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 08:26:46 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/23 08:57:12 by angellop         ###   ########.fr       */
+/*   Updated: 2025/06/23 12:13:27 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,7 @@ long	get_timestamp_ms(long start_time);
 int		lock_fork_with_check(pthread_mutex_t *fork, t_data *data);
 void	philo_take_forks_lr(t_philo *philo, int left, int right, t_data *data);
 void	philo_take_forks_rl(t_philo *philo, int left, int right, t_data *data);
+void	philo_loop(t_philo *philo, t_data *data);
+void	philo_one_entry(t_philo *philo);
 
 #endif

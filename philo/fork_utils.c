@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fork_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/23 12:08:10 by angellop          #+#    #+#             */
+/*   Updated: 2025/06/23 12:08:26 by angellop         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/philo.h"
 
 int	lock_fork_with_check(pthread_mutex_t *fork, t_data *data)
@@ -18,7 +30,7 @@ void	philo_take_forks_lr(t_philo *philo, int left, int right, t_data *data)
 	if (data->num_philos == 2)
 	{
 		print_action(philo, "has taken a fork");
-		usleep(1000); // Forzar timestamp distinto
+		usleep(1000);
 		if (!lock_fork_with_check(&data->forks[right], data))
 		{
 			pthread_mutex_unlock(&data->forks[left]);
@@ -43,7 +55,7 @@ void	philo_take_forks_rl(t_philo *philo, int left, int right, t_data *data)
 	if (data->num_philos == 2)
 	{
 		print_action(philo, "has taken a fork");
-		usleep(1000); // Forzar timestamp distinto
+		usleep(1000);
 		if (!lock_fork_with_check(&data->forks[left], data))
 		{
 			pthread_mutex_unlock(&data->forks[right]);

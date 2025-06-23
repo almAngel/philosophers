@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:15:00 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/23 09:13:44 by angellop         ###   ########.fr       */
+/*   Updated: 2025/06/23 12:07:52 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	philo_eat(t_philo *philo)
 	print_action(philo, "is eating");
 	usleep(philo->data->time_to_eat * 1000);
 	philo->meals_eaten++;
-	if (philo->data->num_meals > 0 && philo->meals_eaten >= philo->data->num_meals)
+	if (philo->data->num_meals > 0
+		&& philo->meals_eaten >= philo->data->num_meals)
 		philo->is_full = 1;
 }
 

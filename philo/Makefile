@@ -6,7 +6,7 @@
 #    By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/20 11:17:45 by angellop          #+#    #+#              #
-#    Updated: 2025/06/23 11:19:34 by angellop         ###   ########.fr        #
+#    Updated: 2025/06/23 12:14:32 by angellop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,14 +23,15 @@ SRCS		=	main.c \
 				init.c \
 				monitor.c \
 				actions.c \
-				fork_utils.c
+				fork_utils.c \
+				philo_routine.c
 				
 OBJS		= $(SRCS:.c=.o)
 
 TEST_SRCS	= test/test_validate_args.c test/test_init.c test/test_start_simulation.c
 TESTS		= test_validate_args test_init test_start_simulation
 TEST_OBJS	= $(TEST_SRCS:.c=.o)
-COMMON_OBJS = philosophers.o utils.o init.o actions.o monitor.o fork_utils.o
+COMMON_OBJS = philosophers.o utils.o init.o actions.o monitor.o fork_utils.o philo_routine.o
 
 all: $(NAME)
 
