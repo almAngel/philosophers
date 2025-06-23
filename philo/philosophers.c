@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 08:26:43 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/15 16:18:52 by angellop         ###   ########.fr       */
+/*   Updated: 2025/06/23 09:46:38 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 
 int	validate_args(int ac, char **av)
 {
-	int	i;
+	int i;
+	int val;
 
 	if (!av || (ac != 5 && ac != 6))
 		return (0);
 	i = 1;
 	while (i < ac)
-		if (!av[i] || ft_atoi(av[i++]) <= 0)
+	{
+		val = ft_atoi(av[i]);
+		if (!av[i] || val <= 0)
 			return (0);
+		i++;
+	}
 	return (1);
 }
 
@@ -38,6 +43,8 @@ void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
 	t_data	*data;
+	int		has_left;
+	int		has_right;
 
 	philo = (t_philo *)arg;
 	data = philo->data;
@@ -46,12 +53,26 @@ void	*philo_routine(void *arg)
 		philo_one_routine(philo);
 		return (0);
 	}
-	while (!data->someone_died)
+	while (!data->someone_died && !philo->is_full)
 	{
+		has_left = 0;
+		has_right = 0;
 		philo_take_forks(philo);
+		has_left = 1;
+		has_right = 1;
+		if (philo->is_full || data->someone_died)
+		{
+			if (has_left)
+				pthread_mutex_unlock(&data->forks[philo->left_fork]);
+			if (has_right)
+				pthread_mutex_unlock(&data->forks[philo->right_fork]);
+			break ;
+		}
 		philo_eat(philo);
-		pthread_mutex_unlock(&data->forks[philo->left_fork]);
-		pthread_mutex_unlock(&data->forks[philo->right_fork]);
+		if (has_left)
+			pthread_mutex_unlock(&data->forks[philo->left_fork]);
+		if (has_right)
+			pthread_mutex_unlock(&data->forks[philo->right_fork]);
 		philo_sleep_and_think(philo);
 	}
 	return (0);

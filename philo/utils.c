@@ -6,18 +6,11 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 14:39:54 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/23 08:00:46 by angellop         ###   ########.fr       */
+/*   Updated: 2025/06/23 09:58:46 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/philo.h"
-
-static int	skip_spaces(const char *s, int i)
-{
-	while (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13))
-		i++;
-	return (i);
-}
 
 static int	is_valid_int(unsigned long long n, int sign)
 {
@@ -32,12 +25,11 @@ int	ft_atoi(const char *nptr)
 	int					sign;
 	unsigned long long	n;
 
+	if (!nptr || !*nptr)
+		return (0);
 	i = 0;
 	sign = 1;
 	n = 0;
-	if (!nptr)
-		return (0);
-	i = skip_spaces(nptr, i);
 	if (nptr[i] == '-')
 		sign = -1;
 	if (nptr[i] == '+' || nptr[i] == '-')
@@ -46,7 +38,6 @@ int	ft_atoi(const char *nptr)
 		return (0);
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 		n = n * 10 + (nptr[i++] - '0');
-	i = skip_spaces(nptr, i);
 	if (nptr[i] != '\0' || !is_valid_int(n, sign))
 		return (0);
 	return ((int)(n * sign));

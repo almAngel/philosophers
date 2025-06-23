@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 12:44:17 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/15 15:06:28 by angellop         ###   ########.fr       */
+/*   Updated: 2025/06/23 08:57:17 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	init_philos_structs(t_data *data, t_philo *philos)
 		philos[i].left_fork = i;
 		philos[i].right_fork = (i + 1) % data->num_philos;
 		philos[i].meals_eaten = 0;
+		philos[i].is_full = 0;
 		philos[i].data = data;
 		i++;
 	}

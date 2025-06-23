@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 08:26:46 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/23 08:02:35 by angellop         ###   ########.fr       */
+/*   Updated: 2025/06/23 08:57:12 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_philo
 	int				right_fork;
 	long			last_meal;
 	int				meals_eaten;
+	int				is_full;
 	pthread_t		thread;
 	struct s_data	*data;
 }	t_philo;
@@ -56,5 +57,8 @@ void	philo_sleep_and_think(t_philo *philo);
 void	*monitor_routine(void *arg);
 void	unlock_all_forks(t_data *data);
 long	get_timestamp_ms(long start_time);
+int		lock_fork_with_check(pthread_mutex_t *fork, t_data *data);
+void	philo_take_forks_lr(t_philo *philo, int left, int right, t_data *data);
+void	philo_take_forks_rl(t_philo *philo, int left, int right, t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:15:00 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/15 16:15:12 by angellop         ###   ########.fr       */
+/*   Updated: 2025/06/23 09:15:09 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	check_death_and_full(t_data *data, t_philo *philos, int *full_count)
 			unlock_all_forks(data);
 			return (1);
 		}
-		if (data->num_meals > 0 && philos[i].meals_eaten >= data->num_meals)
+		if (data->num_meals > 0 && philos[i].is_full)
 			(*full_count)++;
 		i++;
 	}
@@ -62,11 +62,7 @@ void	*monitor_routine(void *arg)
 		if (check_death_and_full(data, philos, &full_count))
 			return (0);
 		if (data->num_meals > 0 && full_count == data->num_philos)
-		{
-			data->someone_died = 1;
-			unlock_all_forks(data);
 			return (0);
-		}
 		usleep(1000);
 	}
 	return (0);
