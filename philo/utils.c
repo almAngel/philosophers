@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 14:39:54 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/15 14:43:21 by angellop         ###   ########.fr       */
+/*   Updated: 2025/06/23 08:00:46 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,20 @@ int	ft_atoi(const char *nptr)
 	return ((int)(n * sign));
 }
 
-long get_time_ms(void)
+long	get_time_ms(void)
 {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-long get_timestamp_ms(long start_time)
+long	get_timestamp_ms(long start_time)
 {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    long now = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-    return (now - start_time);
+	struct timeval	tv;
+	long			now;
+
+	gettimeofday(&tv, NULL);
+	now = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	return (now - start_time);
 }

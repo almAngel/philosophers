@@ -6,12 +6,12 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 08:26:46 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/15 14:39:05 by angellop         ###   ########.fr       */
+/*   Updated: 2025/06/23 08:02:35 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef PHILO_H
+# define PHILO_H
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -30,7 +30,7 @@ typedef struct s_data
 	pthread_mutex_t	print_mutex;
 	int				someone_died;
 	long			start_time;
-} t_data;
+}	t_data;
 
 typedef struct s_philo
 {
@@ -41,7 +41,7 @@ typedef struct s_philo
 	int				meals_eaten;
 	pthread_t		thread;
 	struct s_data	*data;
-}   t_philo;
+}	t_philo;
 
 int		ft_atoi(const char *nptr);
 int		validate_args(int ac, char **av);
@@ -56,6 +56,5 @@ void	philo_sleep_and_think(t_philo *philo);
 void	*monitor_routine(void *arg);
 void	unlock_all_forks(t_data *data);
 long	get_timestamp_ms(long start_time);
-
 
 #endif
