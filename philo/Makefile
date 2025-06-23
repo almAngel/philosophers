@@ -6,7 +6,7 @@
 #    By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/20 11:17:45 by angellop          #+#    #+#              #
-#    Updated: 2025/06/23 10:05:48 by angellop         ###   ########.fr        #
+#    Updated: 2025/06/23 11:19:34 by angellop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ SRCS		=	main.c \
 				
 OBJS		= $(SRCS:.c=.o)
 
-TEST_SRCS	= test/test_validate_args.c
-TESTS		= test_validate_args
+TEST_SRCS	= test/test_validate_args.c test/test_init.c test/test_start_simulation.c
+TESTS		= test_validate_args test_init test_start_simulation
 TEST_OBJS	= $(TEST_SRCS:.c=.o)
 COMMON_OBJS = philosophers.o utils.o init.o actions.o monitor.o fork_utils.o
 
@@ -46,6 +46,13 @@ $(TESTS):
 test: $(TESTS)
 	@for t in $(TESTS); do ./test/$$t; done
 
+functional_tests:
+	@echo "Running all functional tests..."
+	@for t in functional_tests/*.sh; do \
+		echo "$$t"; \
+		bash "$$t" || exit 1; \
+	done
+
 clean:
 	@rm -f $(OBJS) $(TEST_OBJS) test/*.o test/$(TESTS)
 
@@ -54,4 +61,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re test functional_tests

@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 08:26:43 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/23 09:46:38 by angellop         ###   ########.fr       */
+/*   Updated: 2025/06/23 11:02:31 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,12 @@ void	*philo_routine(void *arg)
 	}
 	while (!data->someone_died && !philo->is_full)
 	{
+		usleep(philo->id * 10); // Stagger start based on philosopher ID
 		has_left = 0;
 		has_right = 0;
+		// Alternation: even philosophers wait a bit before taking forks
+		if (philo->id % 2 == 0)
+			usleep(200);
 		philo_take_forks(philo);
 		has_left = 1;
 		has_right = 1;
@@ -73,6 +77,7 @@ void	*philo_routine(void *arg)
 			pthread_mutex_unlock(&data->forks[philo->left_fork]);
 		if (has_right)
 			pthread_mutex_unlock(&data->forks[philo->right_fork]);
+		usleep(100); // Añadido: pequeña pausa tras soltar los forks para evitar starvation
 		philo_sleep_and_think(philo);
 	}
 	return (0);

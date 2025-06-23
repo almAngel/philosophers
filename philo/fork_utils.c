@@ -15,6 +15,18 @@ void	philo_take_forks_lr(t_philo *philo, int left, int right, t_data *data)
 {
 	if (!lock_fork_with_check(&data->forks[left], data))
 		return ;
+	if (data->num_philos == 2)
+	{
+		print_action(philo, "has taken a fork");
+		usleep(1000); // Forzar timestamp distinto
+		if (!lock_fork_with_check(&data->forks[right], data))
+		{
+			pthread_mutex_unlock(&data->forks[left]);
+			return ;
+		}
+		print_action(philo, "has taken a fork");
+		return ;
+	}
 	print_action(philo, "has taken a fork");
 	if (!lock_fork_with_check(&data->forks[right], data))
 	{
@@ -28,6 +40,18 @@ void	philo_take_forks_rl(t_philo *philo, int left, int right, t_data *data)
 {
 	if (!lock_fork_with_check(&data->forks[right], data))
 		return ;
+	if (data->num_philos == 2)
+	{
+		print_action(philo, "has taken a fork");
+		usleep(1000); // Forzar timestamp distinto
+		if (!lock_fork_with_check(&data->forks[left], data))
+		{
+			pthread_mutex_unlock(&data->forks[right]);
+			return ;
+		}
+		print_action(philo, "has taken a fork");
+		return ;
+	}
 	print_action(philo, "has taken a fork");
 	if (!lock_fork_with_check(&data->forks[left], data))
 	{
