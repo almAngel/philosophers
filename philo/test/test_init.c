@@ -27,7 +27,7 @@ MU_TEST(test_data_init_from_args) {
 // Test: inicialización de t_data sin argumento opcional
 MU_TEST(test_data_init_no_optional) {
     t_data data;
-    char *av[] = {"./philo", "4", "800", "200", "200"};
+    char *av[] = {"./philo", "4", "800", "200", "200", NULL};
     int ac = 5;
 
     data.num_philos = ft_atoi(av[1]);
@@ -45,7 +45,7 @@ MU_TEST(test_data_init_no_optional) {
 MU_TEST(test_init_simulation_success) {
     t_data data;
     t_philo *philos = NULL;
-    char *av[] = {"./philo", "3", "800", "200", "200"};
+    char *av[] = {"./philo", "3", "800", "200", "200", NULL};
     int ac = 5;
 
     data.num_philos = ft_atoi(av[1]);
@@ -78,6 +78,7 @@ MU_TEST(test_init_simulation_fail_zero_philos) {
     data.time_to_eat = 200;
     data.time_to_sleep = 200;
     data.num_meals = 0;
+	data.forks = NULL;
     int result = init_simulation(&data, &philos);
     mu_assert("init_simulation should fail with 0 philosophers", result == 0);
     mu_assert("forks should be NULL", data.forks == NULL);

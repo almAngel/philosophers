@@ -45,7 +45,7 @@ MU_TEST(test_start_simulation_with_num_meals) {
 MU_TEST(test_start_simulation_without_num_meals) {
     t_data data;
     t_philo *philos = NULL;
-    char *av[] = {"./philo", "2", "800", "200", "200"};
+    char *av[] = {"./philo", "2", "800", "200", "200", NULL};
     int ac = 5;
 
     data.num_philos = ft_atoi(av[1]);
