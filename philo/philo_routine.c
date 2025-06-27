@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:17:47 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/23 12:18:36 by angellop         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:09:13 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@ static void	philo_one_routine(t_philo *philo)
 static int	philo_check_and_unlock(t_philo *philo, t_data *data,
 		int has_left, int has_right)
 {
-	if (philo->is_full || data->someone_died)
+	int	is_full;
+
+	pthread_mutex_lock(&philo->data_mutex);
+	is_full = philo->is_full;
+	pthread_mutex_unlock(&philo->data_mutex);
+	if (is_full || data->someone_died)
 	{
 		if (has_left)
 			pthread_mutex_unlock(&data->forks[philo->left_fork]);
@@ -61,8 +66,18 @@ static void	philo_iteration(t_philo *philo, t_data *data)
 
 void	philo_loop(t_philo *philo, t_data *data)
 {
-	while (!data->someone_died && !philo->is_full)
+	int	is_full;
+
+	pthread_mutex_lock(&philo->data_mutex);
+	is_full = philo->is_full;
+	pthread_mutex_unlock(&philo->data_mutex);
+	while (!data->someone_died && !is_full)
+	{
 		philo_iteration(philo, data);
+		pthread_mutex_lock(&philo->data_mutex);
+		is_full = philo->is_full;
+		pthread_mutex_unlock(&philo->data_mutex);
+	}
 }
 
 void	philo_one_entry(t_philo *philo)

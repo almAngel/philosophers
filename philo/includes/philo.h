@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 08:26:46 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/23 12:13:27 by angellop         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:09:08 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_philo
 	long			last_meal;
 	int				meals_eaten;
 	int				is_full;
+	pthread_mutex_t	data_mutex;
 	pthread_t		thread;
 	struct s_data	*data;
 }	t_philo;

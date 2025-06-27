@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:15:00 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/23 12:07:52 by angellop         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:09:12 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,17 @@ void	philo_eat(t_philo *philo)
 {
 	if (philo->data->someone_died)
 		return ;
+	pthread_mutex_lock(&philo->data_mutex);
 	philo->last_meal = get_time_ms();
+	pthread_mutex_unlock(&philo->data_mutex);
 	print_action(philo, "is eating");
 	usleep(philo->data->time_to_eat * 1000);
+	pthread_mutex_lock(&philo->data_mutex);
 	philo->meals_eaten++;
 	if (philo->data->num_meals > 0
 		&& philo->meals_eaten >= philo->data->num_meals)
 		philo->is_full = 1;
+	pthread_mutex_unlock(&philo->data_mutex);
 }
 
 void	philo_sleep_and_think(t_philo *philo)
