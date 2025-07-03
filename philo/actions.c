@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:15:00 by angellop          #+#    #+#             */
-/*   Updated: 2025/07/03 14:30:07 by angellop         ###   ########.fr       */
+/*   Updated: 2025/07/03 15:41:27 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	philo_sleep_and_think(t_philo *philo)
 	if (philo->data->num_philos % 2 == 1 && philo->data->num_philos == 5)
 	{
 		if (philo->id == philo->data->num_philos)
-			usleep((philo->data->time_to_eat * 2 - philo->data->time_to_sleep) * 200);
+			usleep((philo->data->time_to_eat * 2
+					- philo->data->time_to_sleep) * 200);
 		else
 			usleep(50);
 	}

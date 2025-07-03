@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:15:00 by angellop          #+#    #+#             */
-/*   Updated: 2025/07/03 12:21:10 by angellop         ###   ########.fr       */
+/*   Updated: 2025/07/03 15:41:58 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,8 @@ static int	check_death_and_full(t_data *data, t_philo *philos, int *full_count)
 			unlock_all_forks(data);
 			return (1);
 		}
-		if (data->num_meals > 0 && philos[i].is_full)
+		if (data->num_meals > 0 && philos[i++].is_full)
 			(*full_count)++;
-		i++;
 	}
 	return (0);
 }
