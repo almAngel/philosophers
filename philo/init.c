@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 12:44:17 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/23 08:57:17 by angellop         ###   ########.fr       */
+/*   Updated: 2025/07/03 12:21:16 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	init_philos_structs(t_data *data, t_philo *philos)
 	while (i < data->num_philos)
 		pthread_mutex_init(&data->forks[i++], NULL);
 	pthread_mutex_init(&data->print_mutex, NULL);
+	pthread_mutex_init(&data->death_mutex, NULL);
+	pthread_mutex_init(&data->meal_mutex, NULL);
 }
 
 int	init_simulation(t_data *data, t_philo **philos)

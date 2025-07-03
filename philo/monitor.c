@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:15:00 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/23 10:51:29 by angellop         ###   ########.fr       */
+/*   Updated: 2025/07/03 12:21:10 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int	check_death_and_full(t_data *data, t_philo *philos, int *full_count)
 {
 	int		i;
 	long	now;
+	long	last_meal_time;
 	long	timestamp;
 
 	i = 0;
@@ -32,13 +33,14 @@ static int	check_death_and_full(t_data *data, t_philo *philos, int *full_count)
 	while (i < data->num_philos)
 	{
 		now = get_time_ms();
-		if (now - philos[i].last_meal > data->time_to_die)
+		last_meal_time = get_last_meal_time(&philos[i]);
+		if (now - last_meal_time > data->time_to_die)
 		{
 			pthread_mutex_lock(&data->print_mutex);
 			timestamp = get_timestamp_ms(data->start_time);
 			printf("%ld %d died\n", timestamp, philos[i].id);
 			pthread_mutex_unlock(&data->print_mutex);
-			data->someone_died = 1;
+			set_death_flag(data);
 			unlock_all_forks(data);
 			return (1);
 		}
@@ -57,13 +59,13 @@ void	*monitor_routine(void *arg)
 
 	data = ((t_philo *)arg)->data;
 	philos = (t_philo *)arg;
-	while (!data->someone_died)
+	while (!is_simulation_over(data))
 	{
 		if (check_death_and_full(data, philos, &full_count))
 			return (0);
 		if (data->num_meals > 0 && full_count == data->num_philos)
 			return (0);
-		usleep(1000);
+		usleep(500);
 	}
 	return (0);
 }

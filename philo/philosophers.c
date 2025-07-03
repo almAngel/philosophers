@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 08:26:43 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/23 12:13:54 by angellop         ###   ########.fr       */
+/*   Updated: 2025/07/03 13:05:25 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ void	*philo_routine(void *arg)
 		philo_one_entry(philo);
 		return (0);
 	}
+	update_last_meal(philo);
+	if (philo->id % 2 == 0)
+		usleep(100);
 	philo_loop(philo, data);
 	return (0);
 }

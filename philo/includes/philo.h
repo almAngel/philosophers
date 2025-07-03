@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 08:26:46 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/23 12:13:27 by angellop         ###   ########.fr       */
+/*   Updated: 2025/07/03 12:21:15 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_data
 	int				num_meals;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	death_mutex;
+	pthread_mutex_t	meal_mutex;
 	int				someone_died;
 	long			start_time;
 }	t_data;
@@ -62,5 +64,11 @@ void	philo_take_forks_lr(t_philo *philo, int left, int right, t_data *data);
 void	philo_take_forks_rl(t_philo *philo, int left, int right, t_data *data);
 void	philo_loop(t_philo *philo, t_data *data);
 void	philo_one_entry(t_philo *philo);
+void	philo_sleep(t_philo *philo);
+void	philo_think(t_philo *philo);
+int		is_simulation_over(t_data *data);
+void	set_death_flag(t_data *data);
+void	update_last_meal(t_philo *philo);
+long	get_last_meal_time(t_philo *philo);
 
 #endif

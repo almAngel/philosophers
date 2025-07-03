@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:08:10 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/23 12:08:26 by angellop         ###   ########.fr       */
+/*   Updated: 2025/07/03 12:21:12 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	lock_fork_with_check(pthread_mutex_t *fork, t_data *data)
 {
 	pthread_mutex_lock(fork);
-	if (data->someone_died)
+	if (is_simulation_over(data))
 	{
 		pthread_mutex_unlock(fork);
 		return (0);

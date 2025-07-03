@@ -6,7 +6,7 @@
 /*   By: angellop <angellop@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 11:25:58 by angellop          #+#    #+#             */
-/*   Updated: 2025/06/23 09:05:55 by angellop         ###   ########.fr       */
+/*   Updated: 2025/07/03 12:21:17 by angellop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	free_all(t_data *data, t_philo *philos)
 	while (i < data->num_philos)
 		pthread_mutex_destroy(&data->forks[i++]);
 	pthread_mutex_destroy(&data->print_mutex);
+	pthread_mutex_destroy(&data->death_mutex);
+	pthread_mutex_destroy(&data->meal_mutex);
 	free(data->forks);
 	free(philos);
 }
